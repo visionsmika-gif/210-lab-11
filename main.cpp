@@ -1,8 +1,14 @@
-// Program features a simple dynamic array of structs.
-// The struct definition itself should ALSO include a dynamic array, + other member variables.
-// Model the program off of a real-world scenario.
+// COMSC-210 | Lab 11 | Mika Aquino
+// IDE used: Visual Studio 2022
 
 /*
+My application is used to create a menu for a restaurant.
+
+The menu contains a variable number of dishes. So, I have a struct to represent a dish.
+
+A dish has a name, a price, and ingredients. These are all member variables of the struct.
+The number of ingredients used in a dish can vary. Thus, the dishes are represented by a dynamic array of strings.
+
 Idea:
 
 Create a Dish struct, which contains a: string name, double price, string* ingredients. The ingredients is the dynamic array.
@@ -141,9 +147,12 @@ void displayMenu(const Dish* menu, const int NUM_DISHES) {
 
 void deallocateMenu(Dish* menu, const int NUM_DISHES) {
 	for (int i = 0; i < NUM_DISHES; ++i) {
-		delete[] (menu + i)->ingredients; // This deallocates each array of ingredients, which is a member of each dish element.
-		(menu + i)->ingredients = nullptr; // This prevents the ingredients array from becoming a dangling pointer.
+		// This deallocates the ingredients member of each dish element.
+		delete[] (menu + i)->ingredients;
+		(menu + i)->ingredients = nullptr;
 	}
-	delete[] menu;
+
+	// This deallocates the dynamic array of dishes.
+	delete[] menu; 
 	menu = nullptr;
 }
