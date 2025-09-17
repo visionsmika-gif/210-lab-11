@@ -48,13 +48,25 @@ void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dy
 void displayMenu(const Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and displays each dish.
 
 int main() {
-	const int NUM_DISHES = 3;
+	int numDishes;
+	const int UPPER_LIMIT = 10; // This prevents the user from having an absurdly large number of dishes on their menu.
+	const int LOWER_LIMIT = 1; // The menu must have at least 1 dish.
+	Dish* menu = nullptr;
 
-	// TODO: allow the user to input the number of dishes
-	Dish* menu = new Dish[NUM_DISHES]; // Allocate memory for 3 dishes
+	// Set numDishes
+	cout << "Enter the number of dishes on your menu: ";
+	cin >> numDishes;
+	while (numDishes < LOWER_LIMIT || numDishes > UPPER_LIMIT) {
+		cout << "ERROR: The number of dishes must be between " << LOWER_LIMIT << " and " << UPPER_LIMIT << ". Try again: ";
+		cin >> numDishes;
+	}
+	cin.ignore();
+	cout << "\n";
 
-	populateMenu(menu, NUM_DISHES);
-	displayMenu(menu, NUM_DISHES);
+	menu = new Dish[numDishes]; // Allocate memory for dishes
+
+	populateMenu(menu, numDishes); // Populate the menu with dishes
+	displayMenu(menu, numDishes); // Display the menu's dishes
 
 	// TODO: deallocate memory
 
@@ -107,6 +119,7 @@ void displayDish(Dish dish) {
 			cout << ", ";
 		}
 	}
+	cout << "\n";
 }
 
 void populateMenu(Dish* menu, const int NUM_DISHES) {
@@ -121,5 +134,6 @@ void displayMenu(const Dish* menu, const int NUM_DISHES) {
 	cout << "Menu:\n";
 	for (int i = 0; i < NUM_DISHES; ++i) {
 		displayDish(*(menu + i));
+		cout << "\n";
 	}
 }
