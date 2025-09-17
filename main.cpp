@@ -37,7 +37,7 @@ struct Dish {
 	string name;
 	double price;
 	int numIngredients; // number of elements in the ingredients array
-	string* ingredients = nullptr;
+	string* ingredients = nullptr; // This dynamic array represents the ingredients used in a dish. There is a variable
 };
 
 Dish createDish(); // This function creates and returns a single dish.
@@ -60,9 +60,11 @@ int main() {
 Dish createDish() {
 	Dish dish;
 
+	// Set dish name
 	cout << "Enter dish name: ";
 	getline(cin, dish.name);
 
+	// Set dish price
 	cout << "Enter the dish price: ";
 	cin >> dish.price;
 	while (dish.price < 0) {
@@ -70,17 +72,20 @@ Dish createDish() {
 		cin >> dish.price;
 	}
 
+	// Set number of ingredients
 	cout << "Enter the number of ingredients: ";
 	cin >> dish.numIngredients;
 	while (dish.numIngredients <= 0) {
 		cout << "ERROR: The number of ingredients most be greater than 0. Try again: ";
 		cin >> dish.numIngredients;
 	}
+	cin.ignore();
 
+	// Set ingredients
 	dish.ingredients = new string[dish.numIngredients]; // allocate memory for ingredients
-
 	for (int i = 0; i < dish.numIngredients; ++i) {
-		// get ingredient from input
+		cout << "\tIngredient " << i + 1 << ": ";
+		getline(cin, *(dish.ingredients + i));
 	}
 
 	return dish;
@@ -88,8 +93,9 @@ Dish createDish() {
 
 void populateMenu(Dish* menu, const int NUM_DISHES) {
 	for (int i = 0; i < NUM_DISHES; ++i) {
-		cout << "CREATING DISH...\n";
+		cout << "CREATING DISH " << i + 1 << "...\n";
 		*(menu + i) = createDish();
+		cout << "\n";
 	}
 }
 
