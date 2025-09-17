@@ -32,12 +32,39 @@ Do not forget to deallocate memory used by both the dishes in the menu, and the 
 #include <string>
 using namespace std;
 
+// This struct represents a dish in a menu.
 struct Dish {
 	string name;
 	double price;
+	string* ingredients;
 };
 
+void populateMenu(Dish* menu, const int NUM_DISHES);
+void displayMenu(const Dish* menu, const int NUM_DISHES);
+
 int main() {
+	const int NUM_DISHES = 3;
+
+	Dish* menu = new Dish[NUM_DISHES]; // Allocate memory for 3 dishes
+
+	populateMenu(menu, NUM_DISHES);
+	displayMenu(menu, NUM_DISHES);
+
+	// TODO: deallocate memory
 
 	return 0;
+}
+
+void populateMenu(Dish* menu, const int NUM_DISHES) {
+	for (int i = 0; i < NUM_DISHES; ++i) {
+		cout << "CREATING DISH...\n";
+		// Create a dish for each element, *(menu + i)
+	}
+}
+
+void displayMenu(const Dish* menu, const int NUM_DISHES) {
+	cout << "Menu:\n";
+	for (int i = 0; i < NUM_DISHES; ++i) {
+		// Display each element in the array, *(menu + i)
+	}
 }
