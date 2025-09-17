@@ -87,7 +87,7 @@ Dish createDish() {
 	cin.ignore();
 
 	// Set ingredients
-	dish.ingredients = new string[dish.numIngredients]; // allocate memory for ingredients
+	dish.ingredients = new string[dish.numIngredients]; // Allocate memory for ingredients
 	for (int i = 0; i < dish.numIngredients; ++i) {
 		cout << "\t> Ingredient " << i + 1 << ": ";
 		getline(cin, *(dish.ingredients + i));
@@ -99,6 +99,7 @@ Dish createDish() {
 void displayDish(const Dish& dish) {
 	const int CENT_DIGITS = 2; // Used to display 2 digits for cents
 
+	// Display the dish's name, price, and ingredients
 	cout << dish.name << " - ";
 	cout << "$" << fixed << setprecision(CENT_DIGITS) << dish.price << "\n";
 	cout << dish.numIngredients << " ingredients: ";
@@ -112,6 +113,7 @@ void displayDish(const Dish& dish) {
 }
 
 void populateMenu(Dish* menu, const int NUM_DISHES) {
+	// Create dishes to fill up the menu
 	for (int i = 0; i < NUM_DISHES; ++i) {
 		cout << "CREATING DISH " << i + 1 << "...\n";
 		*(menu + i) = createDish();
@@ -120,6 +122,7 @@ void populateMenu(Dish* menu, const int NUM_DISHES) {
 }
 
 void displayMenu(const Dish* menu, const int NUM_DISHES) {
+	// Display each dish on the menu
 	cout << "Menu:\n";
 	for (int i = 0; i < NUM_DISHES; ++i) {
 		displayDish(*(menu + i));
