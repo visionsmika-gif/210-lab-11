@@ -36,9 +36,11 @@ using namespace std;
 struct Dish {
 	string name;
 	double price;
-	string* ingredients;
+	int numIngredients; // number of elements in the ingredients array
+	string* ingredients = nullptr;
 };
 
+Dish createDish(); // This function creates and returns a single dish.
 void populateMenu(Dish* menu, const int NUM_DISHES);
 void displayMenu(const Dish* menu, const int NUM_DISHES);
 
@@ -55,10 +57,39 @@ int main() {
 	return 0;
 }
 
+Dish createDish() {
+	Dish dish;
+
+	cout << "Enter dish name: ";
+	getline(cin, dish.name);
+
+	cout << "Enter the dish price: ";
+	cin >> dish.price;
+	while (dish.price < 0) {
+		cout << "ERROR: The dish price must a positive value. Try again: ";
+		cin >> dish.price;
+	}
+
+	cout << "Enter the number of ingredients: ";
+	cin >> dish.numIngredients;
+	while (dish.numIngredients <= 0) {
+		cout << "ERROR: The number of ingredients most be greater than 0. Try again: ";
+		cin >> dish.numIngredients;
+	}
+
+	dish.ingredients = new string[dish.numIngredients]; // allocate memory for ingredients
+
+	for (int i = 0; i < dish.numIngredients; ++i) {
+		// get ingredient from input
+	}
+
+	return dish;
+}
+
 void populateMenu(Dish* menu, const int NUM_DISHES) {
 	for (int i = 0; i < NUM_DISHES; ++i) {
 		cout << "CREATING DISH...\n";
-		// Create a dish for each element, *(menu + i)
+		*(menu + i) = createDish();
 	}
 }
 
