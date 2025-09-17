@@ -30,6 +30,7 @@ Do not forget to deallocate memory used by both the dishes in the menu, and the 
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 // This struct represents a dish in a menu.
@@ -42,7 +43,8 @@ struct Dish {
 };
 
 Dish createDish(); // This function creates and returns a single dish.
-void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and populates it.
+void displayDish(Dish dish); // This function takes a dish and displays its attributes.
+void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and populates it by calling createDish() for each element.
 void displayMenu(const Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and displays each dish.
 
 int main() {
@@ -86,11 +88,25 @@ Dish createDish() {
 	// Set ingredients
 	dish.ingredients = new string[dish.numIngredients]; // allocate memory for ingredients
 	for (int i = 0; i < dish.numIngredients; ++i) {
-		cout << "\tIngredient " << i + 1 << ": ";
+		cout << "\t> Ingredient " << i + 1 << ": ";
 		getline(cin, *(dish.ingredients + i));
 	}
 
 	return dish;
+}
+
+void displayDish(Dish dish) {
+	const int CENT_DIGITS = 2; // Used to display 2 digits for cents
+
+	cout << dish.name << " - ";
+	cout << "$" << fixed << setprecision(CENT_DIGITS) << dish.price << "\n";
+	cout << dish.numIngredients << " ingredients: ";
+	for (int i = 0; i < dish.numIngredients; ++i) {
+		cout << *(dish.ingredients + i);
+		if (i != dish.numIngredients - 1) { // Output a comma for every ingredient except the last one.
+			cout << ", ";
+		}
+	}
 }
 
 void populateMenu(Dish* menu, const int NUM_DISHES) {
@@ -104,6 +120,6 @@ void populateMenu(Dish* menu, const int NUM_DISHES) {
 void displayMenu(const Dish* menu, const int NUM_DISHES) {
 	cout << "Menu:\n";
 	for (int i = 0; i < NUM_DISHES; ++i) {
-		// Display each element in the array, *(menu + i)
+		displayDish(*(menu + i));
 	}
 }
