@@ -36,17 +36,19 @@ using namespace std;
 struct Dish {
 	string name;
 	double price;
-	int numIngredients; // number of elements in the ingredients array
-	string* ingredients = nullptr; // This dynamic array represents the ingredients used in a dish. There is a variable
+	int numIngredients;
+	string* ingredients = nullptr; // This dynamic array represents the ingredients used in a dish.
+								   // The number of ingredients used in a dish is variable, which is why the array is dynamic.
 };
 
 Dish createDish(); // This function creates and returns a single dish.
-void populateMenu(Dish* menu, const int NUM_DISHES);
-void displayMenu(const Dish* menu, const int NUM_DISHES);
+void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and populates it.
+void displayMenu(const Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and displays each dish.
 
 int main() {
 	const int NUM_DISHES = 3;
 
+	// TODO: allow the user to input the number of dishes
 	Dish* menu = new Dish[NUM_DISHES]; // Allocate memory for 3 dishes
 
 	populateMenu(menu, NUM_DISHES);
