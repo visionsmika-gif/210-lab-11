@@ -46,6 +46,7 @@ Dish createDish(); // This function creates and returns a single dish.
 void displayDish(Dish dish); // This function takes a dish and displays its attributes.
 void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and populates it by calling createDish() for each element.
 void displayMenu(const Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and displays each dish.
+void deallocateMenu(Dish* menu, const int NUM_DISHES); // This function goes through a dynamic array of dishes, deallocates each dish's ingredients member, and then deallocates the dishes array itself.
 
 int main() {
 	int numDishes;
@@ -68,7 +69,7 @@ int main() {
 	populateMenu(menu, numDishes); // Populate the menu with dishes
 	displayMenu(menu, numDishes); // Display the menu's dishes
 
-	// TODO: deallocate memory
+	deallocateMenu(menu, numDishes); // Deallocate memory
 
 	return 0;
 }
@@ -136,4 +137,13 @@ void displayMenu(const Dish* menu, const int NUM_DISHES) {
 		displayDish(*(menu + i));
 		cout << "\n";
 	}
+}
+
+void deallocateMenu(Dish* menu, const int NUM_DISHES) {
+	for (int i = 0; i < NUM_DISHES; ++i) {
+		delete[] (menu + i)->ingredients; // This deallocates each array of ingredients, which is a member of each dish element.
+		(menu + i)->ingredients = nullptr; // This prevents the ingredients array from becoming a dangling pointer.
+	}
+	delete[] menu;
+	menu = nullptr;
 }
