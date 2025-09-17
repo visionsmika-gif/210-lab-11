@@ -9,9 +9,10 @@ A menu can contain any number of dishes. I have a struct to represent a dish.
 I ask the user how many dishes they want to have on their menu -- this menu is represented by a dynamic array of dishes.
 
 Each dish has a name, a price, and ingredients. These are all member variables of the Dish struct.
-A dish can have various ingredients in it. Every time the user adds a new dish to their menu, I ask
-
+A dish can have various ingredients in it. Every time the user adds a new dish to their menu, I ask them what ingredients are in the dish.
 I store these ingredients in a dynamic array of strings.
+
+Once the user is done creating all the dishes for their menu, the menu is displayed to the output.
 
 */
 
@@ -30,7 +31,7 @@ struct Dish {
 };
 
 Dish createDish(); // This function creates and returns a single dish.
-void displayDish(Dish dish); // This function takes a dish and displays its attributes.
+void displayDish(const Dish& dish); // This function takes a dish and displays its attributes.
 void populateMenu(Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and populates it by calling createDish() for each element.
 void displayMenu(const Dish* menu, const int NUM_DISHES); // This function takes a dynamic array of dishes and displays each dish.
 void deallocateMenu(Dish* menu, const int NUM_DISHES); // This function goes through a dynamic array of dishes, deallocates each dish's ingredients member, and then deallocates the dishes array itself.
@@ -95,7 +96,7 @@ Dish createDish() {
 	return dish;
 }
 
-void displayDish(Dish dish) {
+void displayDish(const Dish& dish) {
 	const int CENT_DIGITS = 2; // Used to display 2 digits for cents
 
 	cout << dish.name << " - ";
