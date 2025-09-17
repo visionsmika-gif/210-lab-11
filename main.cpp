@@ -1,36 +1,17 @@
 // COMSC-210 | Lab 11 | Mika Aquino
 // IDE used: Visual Studio 2022
 
-/*
+/* DESCRIPTION:
+
 My application is used to create a menu for a restaurant.
 
-The menu contains a variable number of dishes. So, I have a struct to represent a dish.
+A menu can contain any number of dishes. I have a struct to represent a dish.
+I ask the user how many dishes they want to have on their menu -- this menu is represented by a dynamic array of dishes.
 
-A dish has a name, a price, and ingredients. These are all member variables of the struct.
-The number of ingredients used in a dish can vary. Thus, the dishes are represented by a dynamic array of strings.
+Each dish has a name, a price, and ingredients. These are all member variables of the Dish struct.
+A dish can have various ingredients in it. Every time the user adds a new dish to their menu, I ask
 
-Idea:
-
-Create a Dish struct, which contains a: string name, double price, string* ingredients. The ingredients is the dynamic array.
-
-In the main program:
-Declare a menu, which is a pointer to a dynamic array of NUM_DISH Dish objects.
-menu = newDish[NUM_DISH]
-
-Then call a function to populate the menu with dishes:
-populateMenu(menu, NUM_DISHES); << takes: a Dish ptr, an int
-
-Then call a function to display the menu:
-displayMenu(menu, NUM_DISHES); takes: a Dish ptr, an int
-
-Remember to make the parameters const if appropriate
-
-populateMenu will go through each element in the menu.
-	It will fill each dish with data (probably calling a separate function to do this work).
-
-displayMenu will go through each dish of the menu, and output that dish's attributes
-
-Do not forget to deallocate memory used by both the dishes in the menu, and the strings in each dish.
+I store these ingredients in a dynamic array of strings.
 
 */
 
@@ -99,7 +80,7 @@ Dish createDish() {
 	cout << "Enter the number of ingredients: ";
 	cin >> dish.numIngredients;
 	while (dish.numIngredients <= 0) {
-		cout << "ERROR: The number of ingredients most be greater than 0. Try again: ";
+		cout << "ERROR: The number of ingredients must be greater than 0. Try again: ";
 		cin >> dish.numIngredients;
 	}
 	cin.ignore();
