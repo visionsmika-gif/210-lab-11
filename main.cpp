@@ -12,9 +12,7 @@ Each dish has a name, a price, and ingredients. These are all member variables o
 A dish can have various ingredients in it. Every time the user adds a new dish to their menu, I ask them what ingredients are in the dish.
 I store these ingredients in a dynamic array of strings.
 
-Once the user is done creating all the dishes for their menu, the menu is displayed to the output.
-
-*/
+Once the user is done creating all the dishes for their menu, the menu is displayed to the output. */
 
 #include <iostream>
 #include <string>
